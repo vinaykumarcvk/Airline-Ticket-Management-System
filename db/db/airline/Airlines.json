@@ -1,0 +1,21 @@
+[{
+  "_id": {
+    "$oid": "6385e8f29dacc3aa7de07c8a"
+  },
+  "airline_name": "Indian Airlines"
+},{
+  "_id": {
+    "$oid": "6385e9e79dacc3aa7de07c90"
+  },
+  "airline_name": "Spice Jet"
+},{
+  "_id": {
+    "$oid": "6385e9f39dacc3aa7de07c92"
+  },
+  "airline_name": "Indigo"
+},{
+  "_id": {
+    "$oid": "6385ea0a9dacc3aa7de07c94"
+  },
+  "airline_name": "Deccan Airlines"
+}]

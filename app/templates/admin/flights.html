@@ -1,0 +1,78 @@
+{% set curPage = 'flights'%}
+{% set title = 'Flight List'%}
+{% include 'admin/shared/header.html'%}
+
+<div id="content">
+  <!-- Top Nav  -->
+  {% include 'admin/shared/topnav.html'%}
+
+  <div class="heading">
+    <h3 class="title">{{title}}</h3>
+  </div>
+
+  {% with messages = get_flashed_messages(with_categories=true) %}
+  {% if messages %}
+  {% for category,message in messages %}
+  <div class="alert alert-{{category}} alert-dismissible fade w-50 show" role="alert">
+    {{message}}.
+    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  {% endfor %}
+  {% endif %}
+  {% endwith %}
+
+  <a href="add-flight" class="btn btn-success float-right">+ Add Flight</a>
+
+  <div class="table-responsive mt-5">
+
+    <!-- View Airports -->
+    <table class="table table-bordered" id="table">
+      <thead>
+        <tr>
+          <th style="width: 10%;">S.No</th>
+          <th>Flight&nbsp;No</th>
+          <th>Airplane</th>
+          <th>From&nbsp;City</th>
+          <th>To&nbsp;City</th>
+          <th>Departure&nbsp;Time</th>
+          <th>Arrival&nbsp;Time</th>
+          <th>Duration</th>
+          <th>Stops</th>
+          <th>Fare</th>
+          <th style="width: 20%;">Action</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for flight in flights %}
+        {% set airline  = getAirlineById(flight['airline_id']) %}
+        {% set from_city  = getAirportById(flight['from_airport_id']) %}
+        {% set to_city  = getAirportById(flight['to_airport_id']) %}
+        <tr>
+          <td>{{loop.index}}</td>
+          <td>{{flight['flight_no']}}</td>
+          <td>
+            <div>{{airline['airline_name']}}</div>
+            {% set airplane =getAirplaneById3(flight['airplane_id']) %}
+            <div>{{airplane['airplane_type']}} ({{airplane['airplane_capacity']}})</div>
+          </td>
+          <td>{{from_city['airport_code']}}</td>
+          <td>{{to_city['airport_code']}}</td>
+          <td>{{flight['departure_time'].strftime("%I")}} {{flight['departure_time'].strftime("%M")}} {{flight['departure_time'].strftime("%p")}}</td>
+          <td>{{flight['arrival_time'].strftime("%I")}} {{flight['arrival_time'].strftime("%M")}} {{flight['arrival_time'].strftime("%p")}}</td>
+          <td>{{flight['duration']}}</td>
+          <td>{{flight['stops']}}</td>
+          <td>$&nbsp;{{flight['fare']}}</td>
+          <td>
+            <a href="edit-flight?flight_id={{flight['_id']}}" class="btn btn-sm btn-primary w-100 mt-1">Edit</a>
+            <a href="delete-flight?flight_id={{flight['_id']}}" class="btn btn-sm btn-danger w-100 mt-1" onclick="return confirm('Are you sure? do you want to delete this airline')">Delete</a>
+          </td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+
+</div>
+{% include 'admin/shared/footer.html'%}

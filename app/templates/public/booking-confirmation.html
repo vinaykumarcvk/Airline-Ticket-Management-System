@@ -1,0 +1,147 @@
+{% set curPage = 'index'%}
+{% set title = 'index'%}
+{% include 'shared/header.html'%}
+
+<div class="container-fluid">
+
+  <form action="/booking-confirmation" method="POST">
+
+    <div class="row">
+      <div class="col-md-8">
+
+        <div class="border p-3 my-3 text-center shadow">
+          <h5 class="mb-3">outbound</h5>
+          <div class="row">
+            <div class="col-sm-3">
+              <h6>{{onward_flight['flight_no']}}</h6>
+              <h6>{{onward_flight['departure_city_code']}} -> {{onward_flight['arrival_city_code']}}</h6>
+            </div>
+            <div class="col-sm-3">
+              <h6>{{onward_date.strftime("%d, %b %Y")}}</h6>
+            </div>
+            <div class="col-sm-3">
+              <h6>{{onward_flight["departure_time"].strftime("%I:%M %p")}} - {{onward_flight["arrival_time"].strftime("%I:%M %p")}}
+              </h6>
+            </div>
+            <div class="col-sm-3">
+              <h6>{{onward_flight["duration"]}}</h6>
+            </div>
+          </div>
+        </div>
+
+        <h5 class="text-center">Passenger Info</h5>
+        {% for i in range(passengers)%}
+        <h6>Passenger - {{i+1}}</h6>
+        <div class="form-group row">
+          <div class="col-md-6">
+            <input type="text" name="first_name_{{i}}" class="form-control" placeholder="First Name" required>
+          </div>
+          <div class="col-md-6">
+            <input type="text" name="last_name_{{i}}" class="form-control" placeholder="Last Name" required>
+          </div>
+        </div>
+        <div class="form-group row">
+          <div class="col-md-6">
+            <input type="email" name="email_{{i}}" class="form-control" placeholder="Email" required>
+          </div>
+          <div class="col-md-6">
+            <input type="text" name="phone_number_{{i}}" class="form-control" placeholder="Phone Number" required>
+          </div>
+        </div>
+        <div class="form-group row">
+          <div class="col-md-6">
+            <input type="text" name="state_{{i}}" class="form-control" placeholder="State" required>
+          </div>
+          <div class="col-md-6">
+            <input type="text" name="zipcode_{{i}}" class="form-control" placeholder="Zip code" required>
+          </div>
+        </div>
+        <hr>
+        {% endfor %}        
+      </div>
+
+      <div class="col-md-4">
+        <h5>Trip Total</h5>
+        <small>{{passengers}} passengers</small>
+        {% set flight_fare = onward_flight['fare'] * passengers %}
+        {% set tax = flight_fare * (14.50/100) %}
+        {% set total = flight_fare + tax %}
+        <table class="table">
+          <tr>
+            <th>Flights</th>
+            <td>$ {{round(flight_fare,2)}}</td>
+          </tr>
+          <tr>
+            <th>Taxes, Fees & Charges</th>
+            <td>$ {{round(tax,2)}}</td>
+          </tr>
+          <tr>
+            <th>Amount Due</th>
+            <td>$ {{round(total,2)}}</td>
+          </tr>
+        </table>
+        <div class="border border-primary p-3 shadow">
+          <div class="form-group">
+            <label for="">Credit card number</label>
+            <input type="text" class="form-control" name="credit_card_number" required>
+          </div>
+          <label for="">Expiration date</label>
+          <div class="form-group row">
+            
+            <div class="col-md-8">
+              <select name="month" id="" class="form-control" required>
+                <option value="JAN">JAN</option>
+                <option value="FEB">FEB</option>
+                <option value="MAR">MAR</option>
+                <option value="APR">APR</option>
+                <option value="MAY">MAY</option>
+                <option value="JUN">JUN</option>
+                <option value="JUL">JUL</option>
+                <option value="AUG">AUG</option>
+                <option value="SEP">SEP</option>
+                <option value="OCT">OCT</option>
+                <option value="NOV">NOV</option>
+                <option value="DEC">DEC</option>
+              </select>
+            </div>
+            <div class="col-md-4">
+              <select name="year" id="" class="form-control" required>
+                <option value="2022">2022</option>
+                <option value="2023">2023</option>
+                <option value="2024">2024</option>
+                <option value="2025">2025</option>
+                <option value="2026">2026</option>
+                <option value="2027">2027</option>
+                <option value="2028">2028</option>
+                <option value="2029">2029</option>
+                <option value="2030">2030</option>
+                <option value="2031">2031</option>
+              </select>
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="">CVV</label>
+            <input type="text" class="form-control" name="cvv" required>
+          </div>
+        </div>
+        <input type="submit" class="btn btn-primary form-control mt-3" value="Pay & Book now">
+      </div>
+    </div>
+
+    <input type="hidden" name="journey_type" value="{{journey_type}}">
+    <input type="hidden" name="onward_flight_id" value="{{onward_flight['_id']}}">
+    <input type="hidden" name="onward_departure_city_code" value="{{onward_flight['departure_city_code']}}">
+    <input type="hidden" name="onward_arrival_city_code" value="{{onward_flight['arrival_city_code']}}">
+    <input type="hidden" name="onward_departure_date" value="{{onward_date}}">
+    <input type="hidden" name="onward_departure_time" value="{{onward_flight["departure_time"]}}">
+    <input type="hidden" name="onward_arrival_time" value="{{onward_flight["arrival_time"]}}">
+    <input type="hidden" name="total_amount" value="{{total}}">
+    <input type="hidden" name="passengers" value="{{passengers}}">
+    
+  </form>
+
+
+
+</div>
+
+{% include 'shared/footer.html'%}

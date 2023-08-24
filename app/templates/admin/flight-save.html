@@ -1,0 +1,127 @@
+{% set curPage = 'flights'%}
+{% set title = 'Save Flights'%}
+{% include 'admin/shared/header.html'%}
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
+<script>
+$(document).ready(function(){
+    $("#from_airport_id").on("change",()=>{
+        checkValidation()
+    })
+    $("#to_airport_id").on("change",()=>{
+        checkValidation()
+    })
+});
+function checkValidation(){
+    let from_airport_id = $("#from_airport_id").val()
+    let to_airport_id = $("#to_airport_id").val()
+    if(from_airport_id===to_airport_id) {
+      alert('From City and to City should not be same')
+      $("#to_airport_id").val("")
+    }
+}
+</script>
+
+<div id="content">
+  <!-- Top Nav  -->
+  {% include 'admin/shared/topnav.html'%}
+
+  <div class="heading">
+    <h3 class="title">{{title}}</h3>
+  </div>
+
+  {% with messages = get_flashed_messages(with_categories=true) %}
+  {% if messages %}
+  {% for category,message in messages %}
+  <div class="alert alert-{{category}} alert-dismissible fade w-75 show" role="alert">
+    {{message}}.
+    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  {% endfor %}
+  {% endif %}
+  {% endwith %}
+
+  <div class="p-4 border mt-3">
+
+    <form action="{{'add-flight' if flight['_id'] == null else 'edit-flight'}}" method="post" id="flightForm">
+
+      <div class="form-group row">        
+        <div class="col-md-6">
+          <label for="flight_no">Flight No</label>
+          <input type="text" name="flight_no" id="flight_no" class="form-control" value="{{flight['flight_no']}}" required>
+        </div>
+        <div class="col-md-6">
+          <label for="airline_id">Airline</label>
+          <select name="airline_id" id="airline_id" class="form-control" required>
+            <option value="">--select airline--</option>
+            {% for airplane in airplanes %}
+            {% set airline = getAirlineById2(airplane['airline_id']) %}
+            <option value="{{airplane['_id']}}" >{{airline['airline_name']}}, {{airplane['airplane_type']}} ({{airplane['airplane_capacity']}})</option>
+            {% endfor %}
+          </select>
+        </div>
+      </div>
+
+      <div class="form-group row">        
+        <div class="col-md-6">
+          <label for="from_airport_id">From City</label>
+          <select name="from_airport_id" id="from_airport_id" class="form-control" required>
+            <option value="">--select from--</option>
+            {% for from_airport in from_airports %}
+            <option value="{{from_airport['_id']}}" {{'selected' if from_airport['_id'] == flight['from_airport_id'] else ''}}>{{from_airport['airport_code']}}-{{from_airport['airport_name']}}-{{from_airport['airport_city']}}</option>
+            {% endfor %}
+          </select>
+        </div>
+        <div class="col-md-6">
+          <label for="to_airport_id">To City</label>
+          <select name="to_airport_id" id="to_airport_id" class="form-control" required>
+            <option value="">--select to--</option>
+            {% for airport in to_airports %}
+            <option value="{{airport['_id']}}" {{'selected' if airport['_id'] == flight['to_airport_id'] else ''}}>{{airport['airport_code']}}-{{airport['airport_name']}}-{{airport['airport_city']}}</option>
+            {% endfor %}
+          </select>
+        </div>
+      </div>
+
+      <div class="form-group row">
+        <div class="col-md-6">
+          <label for="departure_time">Departure Time</label>
+          <input type="time" name="departure_time" id="departure_time" class="form-control" value="{{flight['departure_time']}}" required>
+        </div>
+        <div class="col-md-6">
+          <label for="arrival_time">Arrival Time</label>
+          <input type="time" name="arrival_time" id="arrival_time" class="form-control" value="{{flight['arrival_time']}}" required>
+        </div>
+      </div>
+
+      <div class="form-group row">
+        <div class="col-md-6">
+          <label for="available_seats">Available Seats</label>
+          <input type="text" name="available_seats" id="available_seats" class="form-control" value="{{flight['available_seats']}}" required>
+        </div>
+        <div class="col-md-6">
+          <label for="fare">Fare</label>
+          <input type="text" name="fare" id="fare" class="form-control" value="{{flight['fare']}}" required>
+        </div>
+      </div>
+
+      <div class="form-group row">
+        <div class="col-md-4">
+          <input type="hidden" value="{{flight['_id']}}" name="flight_id">
+          <input type="submit" class="btn btn-success form-control" value="{{'Add' if flight['_id'] == null else 'Update'}}">
+        </div>
+        <div class="col-md-4">
+          <a href="flights"  class="btn btn-warning form-control">Back to list</a>
+        </div>
+      </div>
+
+
+    </form>
+
+
+  </div>
+
+</div>
+{% include 'admin/shared/footer.html'%}

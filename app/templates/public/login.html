@@ -1,0 +1,27 @@
+{% set curPage = 'login'%}
+{% set title = 'Login'%}
+{% include 'shared/header.html'%}
+
+<div class="container">
+  <div class="d-flex justify-content-center">
+    <div class="card mt-5" style="width: 23rem;">
+      <div class="card-body">
+        <h5 class="text-danger text-center">{{msg}}</h5>
+        <form action="{{request.url}}" method="post" id="loginForm">
+          <div class="form-group">
+            <label for="email" class="form-label">Email</label>
+            <input type="email" id="email" name="email" class="form-control" required>
+          </div>
+          <div class="form-group">
+            <label for="password" class="form-label">Password</label>
+            <input type="password" id="password" name="password" class="form-control" required>
+          </div>
+          <input type="submit" value="Login" class="btn btn-secondary">
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+{% include 'shared/footer.html'%}
+

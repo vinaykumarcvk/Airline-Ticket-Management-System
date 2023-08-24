@@ -1,0 +1,25 @@
+[{
+  "_id": {
+    "$oid": "6387992557e08dc217dacf39"
+  },
+  "airport_name": "Rajiv Gandhi International Airport",
+  "airport_city": "Hyderabad",
+  "airport_country": "India",
+  "airport_code": "HYD"
+},{
+  "_id": {
+    "$oid": "6387b129ee8c660c89d642a1"
+  },
+  "airport_name": "Chennai International Airport",
+  "airport_code": "MAA",
+  "airport_city": "Chennai",
+  "airport_country": "India"
+},{
+  "_id": {
+    "$oid": "6387b197ee8c660c89d642a2"
+  },
+  "airport_name": "Visakhapatnam International Airport",
+  "airport_code": "VTZ",
+  "airport_city": "Visakhapatnam",
+  "airport_country": "India"
+}]

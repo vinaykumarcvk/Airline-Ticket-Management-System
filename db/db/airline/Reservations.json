@@ -1,0 +1,51 @@
+[{
+  "_id": {
+    "$oid": "638ba225e2e4934d6237837c"
+  },
+  "user_id": {
+    "$oid": "6388c5eae4a78ca164e0824f"
+  },
+  "journey_type": "OneWay",
+  "flight_id": {
+    "$oid": "6389dedd8ea18ed3a3a0fc4c"
+  },
+  "departure_city_code": "HYD",
+  "departure_date": {
+    "$date": {
+      "$numberLong": "1670198400000"
+    }
+  },
+  "price": 26.335,
+  "booked_on": {
+    "$date": {
+      "$numberLong": "1670115197719"
+    }
+  },
+  "passengers": 1,
+  "status": "confirmed"
+},{
+  "_id": {
+    "$oid": "638d410dba1b32a7f2b5cc1b"
+  },
+  "user_id": {
+    "$oid": "6388c5eae4a78ca164e0824f"
+  },
+  "journey_type": "OneWay",
+  "flight_id": {
+    "$oid": "6387c55aa31c2b7a3c44b554"
+  },
+  "departure_city_code": "HYD",
+  "departure_date": {
+    "$date": {
+      "$numberLong": "1670371200000"
+    }
+  },
+  "price": 572.5,
+  "booked_on": {
+    "$date": {
+      "$numberLong": "1670221413118"
+    }
+  },
+  "passengers": 2,
+  "status": "confirmed"
+}]

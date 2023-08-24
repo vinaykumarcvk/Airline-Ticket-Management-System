@@ -1,0 +1,19 @@
+[{
+  "_id": {
+    "$oid": "6388c5eae4a78ca164e0824f"
+  },
+  "first_name": "Matt",
+  "last_name": "Wade",
+  "email": "cust1@gmail.com",
+  "phone_number": "8990899089",
+  "password": "123"
+},{
+  "_id": {
+    "$oid": "6388c655e4a78ca164e08250"
+  },
+  "first_name": "John",
+  "last_name": "Wilson",
+  "email": "jw@test.com",
+  "phone_number": "9099990099",
+  "password": "123"
+}]

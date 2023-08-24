@@ -1,0 +1,60 @@
+{% set curPage = 'airplanes'%}
+{% set title = 'Airplanes'%}
+{% include 'admin/shared/header.html'%}
+
+<div id="content">
+  <!-- Top Nav  -->
+  {% include 'admin/shared/topnav.html'%}
+
+  <div class="heading">
+    <h3 class="title">{{title}}</h3>
+  </div>
+
+  {% with messages = get_flashed_messages(with_categories=true) %}
+  {% if messages %}
+  {% for category,message in messages %}
+  <div class="alert alert-{{category}} alert-dismissible fade w-50 show" role="alert">
+    {{message}}.
+    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  {% endfor %}
+  {% endif %}
+  {% endwith %}
+
+  <a href="add-airplane" class="btn btn-success float-right">+ Add Airplane</a>
+
+  <div class="table-responsive mt-5">   
+  
+    <!-- View Airplanes -->
+    <table class="table table-bordered" id="table">
+      <thead>
+        <tr>
+          <th style="width: 10%;">S.No</th>
+          <th>Airlines</th>
+          <th>Airplane Type</th>
+          <th>Capacity</th>
+          <th style="width: 20%;">Action</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for airplane in airplanes %}
+        {% set airline = getAirlineById(airplane['airline_id'])%}
+        <tr>
+          <td>{{loop.index}}</td>
+          <td>{{airline['airline_name']}}</td>
+          <td>{{airplane['airplane_type']}}</td>
+          <td>{{airplane['airplane_capacity']}}</td>
+          <td>
+            <a href="edit-airplane?airplane_id={{airplane['_id']}}" class="btn btn-sm btn-primary">Edit</a>
+            <a href="delete-airplane?airplane_id={{airplane['_id']}}" class="btn btn-sm btn-danger" onclick="return confirm('Are you sure? do you want to delete this airline')">Delete</a>
+          </td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+
+</div>
+{% include 'admin/shared/footer.html'%}

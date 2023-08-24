@@ -1,0 +1,54 @@
+{% set curPage = 'airplanes'%}
+{% set title = 'Save Airplane'%}
+{% include 'admin/shared/header.html'%}
+
+<div id="content">
+  <!-- Top Nav  -->
+  {% include 'admin/shared/topnav.html'%}
+
+  <div class="heading">
+    <h3 class="title">{{title}}</h3>
+  </div>
+
+  <div class="p-4 border mt-3">
+
+    <form action="{{'add-airplane' if airplane['_id'] == null else 'edit-airplane'}}" method="post" id="airplaneForm">
+      <div class="form-group row">
+
+        <div class="col-md-4">
+          <label for="airline_id">Airline</label>
+          <select name="airline_id" id="airline_id" class="form-control" required>
+            <option value="">--select airline--</option>
+            {% for airline in airlines %}
+            <option value="{{airline['_id']}}" {{'selected' if airline['_id'] == airplane['airline_id'] else ''}}>{{airline['airline_name']}}</option>
+            {% endfor %}
+          </select>
+        </div>
+        <div class="col-md-4">
+          <label for="airplane_type">Airplane  type</label>
+          <input type="text" name="airplane_type" id="airplane_type" class="form-control" value="{{airplane['airplane_type']}}" required>
+        </div>
+        <div class="col-md-4">
+          <label for="airplane_capacity">Capacity</label>
+          <input type="text" name="airplane_capacity" id="airplane_capacity" class="form-control" value="{{airplane['airplane_capacity']}}" required>
+        </div>
+      </div>
+
+      <div class="form-group row">
+        <div class="col-md-4">
+          <input type="hidden" value="{{airplane['_id']}}" name="airplane_id">
+          <input type="submit" class="btn btn-success form-control" value="{{'Add' if airplane['_id'] == null else 'Update'}}">          
+        </div>
+        <div class="col-md-4">
+          <a href="airplanes" class="btn btn-warning form-control">Back to list</a>         
+        </div>
+      </div>
+
+
+    </form>
+
+
+  </div>
+
+</div>
+{% include 'admin/shared/footer.html'%}

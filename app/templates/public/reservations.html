@@ -1,0 +1,47 @@
+{% set curPage = 'bookings'%}
+{% set title = 'Bookings'%}
+{% include 'shared/header.html'%}
+
+<div class="container-fluid">
+  <h5>Reservations</h5>
+  <div class="table-responsive border p-2">
+    <table class="table table-bordered">
+      <thead>
+        <tr>
+          <th>S.No</th>
+          <th>Reservation Id</th>
+          <th>Booked on</th>
+          <th>flight</th>
+          <th>Departure Date</th>
+          <th>From</th>
+          <th>To</th>
+          <th>Status</th>
+          <th style="width: 15%;">Action</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for res in reservations%}
+        {%set flight = getFlightById(res['flight_id'])%}
+        {%set source_airport = getAirportById(flight['from_airport_id'])%}
+        {%set dest_airport = getAirportById(flight['to_airport_id'])%}
+        <tr>
+          <td>{{loop.index}}</td>
+          <td>{{res['_id']}}</td>
+          <td>{{res['booked_on'].strftime("%d-%m-%Y")}}</td>
+          <td>{{flight['flight_no']}}</td>
+          <td>{{res['departure_date'].strftime("%d-%m-%Y")}}</td>
+          <td>{{source_airport['airport_code']}}</td>
+          <td>{{dest_airport['airport_code']}}</td>
+          <td>{{res["status"]}}</td>
+          <td>
+            <a href="/passengers?reservation_id={{res['_id']}}" class="btn btn-sm btn-success w-100">View Passengers</a>
+            <a href="/cancel?reservation_id={{res['_id']}}" class="btn btn-sm btn-danger w-100 mt-1">Cancel</a>
+          </td>
+        </tr>
+        {% endfor%}
+      </tbody>
+    </table>
+  </div>
+</div>
+
+{% include 'shared/footer.html'%}

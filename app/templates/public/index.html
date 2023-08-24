@@ -1,0 +1,98 @@
+{% set curPage = 'index'%}
+{% set title = 'index'%}
+{% include 'shared/header.html'%}
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
+<script>
+$(document).ready(function(){
+    $("#from_airport").on("change",()=>{
+        checkValidation()
+    })
+    $("#to_airport").on("change",()=>{
+        checkValidation()
+    })
+});
+function checkValidation(){
+    let from_airport = $("#from_airport").val()
+    let to_airport = $("#to_airport").val()
+    if(from_airport===to_airport) {
+      alert('From City and to City should not be same')
+      $("#to_airport").val("")
+    }
+}
+</script>
+<div class="container-fluid">
+
+  <div class="border p-5 my-3 shadow">
+    <form action="/search" method="get">
+      <div class="form-group">
+        <div class="form-check form-check-inline">
+          <input class="form-check-input" type="radio" name="journey_type" id="OneWay" value="OneWay" checked>
+          <label class="form-check-label" for="OneWay">One-Way</label>
+        </div>
+        <!-- <div class="form-check form-check-inline">
+          <input class="form-check-input" type="radio" name="journey_type" id="RoundTrip" value="RoundTrip">
+          <label class="form-check-label" for="RoundTrip">Round Trip</label>
+        </div> -->
+      </div>
+
+      <div class="form-group row">
+        <div class="col-md-2">
+          <label for="from_airport">Depart</label>
+          <select name="from_airport" id="from_airport" class="form-control" required>
+            <option value="">--select--</option>
+            {% for from in from_airports %}
+            <option value="{{from['_id']}}">{{from["airport_code"]}}-{{from['airport_city']}}</option>
+            {% endfor %}
+          </select>
+        </div>
+        <div class="col-md-2">
+          <label for="to_airport">Destination</label>
+          <select name="to_airport" id="to_airport" class="form-control" required>
+            <option value="">--select--</option>
+            {% for to in to_airports %}
+            <option value="{{to['_id']}}">{{to["airport_code"]}}-{{to['airport_city']}}</option>
+            {% endfor %}
+          </select>
+        </div>
+        <div class="col-md-2">
+          <label for="">Onward</label>
+          <input type="date" name="onward_date"   min="{{today}}"  class="form-control" required>
+        </div>
+        <!-- <div class="col-md-2">
+          <label for="return_date">Return</label>
+          <input type="date" name="return_date" id="return_date" class="form-control" >
+        </div> -->
+        <div class="col-md-2">
+          <label for="travel_class">Class</label>
+          <select name="travel_class" id="travel_class" class="form-control">
+            <option value="Economy">Economy</option>
+            <option value="Business">Business</option>
+            <option value="FirstClass">First Class</option>
+          </select>
+        </div>
+        <div class="col-md-2">
+          <label for="passengers">Passengers</label>
+          <input type="number" min="1" name="passengers" id="passengers" class="form-control" required>
+        </div>
+      </div>
+
+      <div class="form-group row">
+        <div class="col-md-3">
+          <input type="submit" class="btn btn-primary form-control" value="search">
+        </div>
+      </div>
+
+    </form>
+  </div>
+</div>
+<script>
+  $(document).ready(function () {
+    let today = new Date();
+     today.setDate(today.getDate()-1);
+     let yesterday = today;
+    yesterday = yesterday.toISOString().split('T')[0];
+    $("#onward_date").attr('min', yesterday);
+});
+</script>
+
+{% include 'shared/footer.html'%}

@@ -1,0 +1,136 @@
+[{
+  "_id": {
+    "$oid": "6387c55aa31c2b7a3c44b554"
+  },
+  "flight_no": "AI 111",
+  "airline_id": {
+    "$oid": "6385e8f29dacc3aa7de07c8a"
+  },
+  "from_airport_id": {
+    "$oid": "6387992557e08dc217dacf39"
+  },
+  "to_airport_id": {
+    "$oid": "6387b129ee8c660c89d642a1"
+  },
+  "departure_time": {
+    "$date": {
+      "$numberLong": "1669940400000"
+    }
+  },
+  "arrival_time": {
+    "$date": {
+      "$numberLong": "1669944600000"
+    }
+  },
+  "available_seats": 180,
+  "fare": 250,
+  "duration": "1 hrs 10 min"
+},{
+  "_id": {
+    "$oid": "6387c74d4105ecec26b25be9"
+  },
+  "flight_no": "SJ 007",
+  "airline_id": {
+    "$oid": "6385e9e79dacc3aa7de07c90"
+  },
+  "from_airport_id": {
+    "$oid": "6387992557e08dc217dacf39"
+  },
+  "to_airport_id": {
+    "$oid": "6387b197ee8c660c89d642a2"
+  },
+  "departure_time": {
+    "$date": {
+      "$numberLong": "1669950000000"
+    }
+  },
+  "arrival_time": {
+    "$date": {
+      "$numberLong": "1669954200000"
+    }
+  },
+  "available_seats": 120,
+  "fare": 150,
+  "duration": "1 hrs 10 min"
+},{
+  "_id": {
+    "$oid": "6389dedd8ea18ed3a3a0fc4c"
+  },
+  "flight_no": " BL 203",
+  "airline_id": {
+    "$oid": "6385e9f39dacc3aa7de07c92"
+  },
+  "from_airport_id": {
+    "$oid": "6387992557e08dc217dacf39"
+  },
+  "to_airport_id": {
+    "$oid": "6387b129ee8c660c89d642a1"
+  },
+  "departure_time": {
+    "$date": {
+      "$numberLong": "-2208925740000"
+    }
+  },
+  "arrival_time": {
+    "$date": {
+      "$numberLong": "-2208922080000"
+    }
+  },
+  "available_seats": 2,
+  "fare": 23,
+  "duration": "1 hrs 01 min"
+},{
+  "_id": {
+    "$oid": "638a1061b0f817938a7bd8ec"
+  },
+  "flight_no": "CH 111",
+  "airline_id": {
+    "$oid": "6385e9e79dacc3aa7de07c90"
+  },
+  "from_airport_id": {
+    "$oid": "6387b129ee8c660c89d642a1"
+  },
+  "to_airport_id": {
+    "$oid": "6387992557e08dc217dacf39"
+  },
+  "departure_time": {
+    "$date": {
+      "$numberLong": "-2208915000000"
+    }
+  },
+  "arrival_time": {
+    "$date": {
+      "$numberLong": "-2208912000000"
+    }
+  },
+  "duration": "0 hrs 50 min",
+  "available_seats": "5",
+  "fare": 23
+},{
+  "_id": {
+    "$oid": "638a1087b0f817938a7bd8ed"
+  },
+  "flight_no": "CHN 113",
+  "airline_id": {
+    "$oid": "6385e9f39dacc3aa7de07c92"
+  },
+  "from_airport_id": {
+    "$oid": "6387b129ee8c660c89d642a1"
+  },
+  "to_airport_id": {
+    "$oid": "6387992557e08dc217dacf39"
+  },
+  "departure_time": {
+    "$date": {
+      "$numberLong": "-2208984600000"
+    }
+  },
+  "arrival_time": {
+    "$date": {
+      "$numberLong": "-2208980400000"
+    }
+  },
+  "duration": "1 hrs 10 min",
+  "available_seats": "5",
+  "fare": 25
+}]

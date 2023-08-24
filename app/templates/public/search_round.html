@@ -1,0 +1,156 @@
+{% set curPage = 'search'%}
+{% set title = 'index'%}
+{% include 'shared/header.html'%}
+
+<div class="container-fluid">
+
+  <div class="border p-3 my-3 shadow">
+    <form action="/search" method="get">
+      <div class="form-group">
+        <div class="form-check form-check-inline">
+          <input class="form-check-input" type="radio" name="journey_type" id="OneWay" value="OneWay" {{'checked' if journey_type=='OneWay' else ''}}>
+          <label class="form-check-label" for="OneWay">One-Way</label>
+        </div>
+        <div class="form-check form-check-inline">
+          <input class="form-check-input" type="radio" name="journey_type" id="RoundTrip" value="RoundTrip" {{'checked' if journey_type=='RoundTrip' else ''}}>
+          <label class="form-check-label" for="RoundTrip">Round Trip</label>
+        </div>
+      </div>
+
+      <div class="form-group row">
+        <div class="col-md-2">
+          <label for="from_airport">Depart</label>
+          <select name="from_airport" id="from_airport" class="form-control" required>
+            <option value="">--select--</option>
+            {% for from in from_airports %}
+            <option value="{{from['_id']}}" {{'selected' if from_airport==from['_id'] else ''}}>{{from["airport_code"]}}-{{from['airport_city']}}</option>
+            {% endfor %}
+          </select>
+        </div>
+        <div class="col-md-2">
+          <label for="to_airport">Destination</label>
+          <select name="to_airport" id="to_airport" class="form-control" required>
+            <option value="">--select--</option>
+            {% for to in to_airports %}
+            <option value="{{to['_id']}}" {{'selected' if to_airport==to['_id'] else ''}}>{{to["airport_code"]}}-{{to['airport_city']}}</option>
+            {% endfor %}
+          </select>
+        </div>
+        <div class="col-md-2">
+          <label for="onward_date">Onward</label>
+          <input type="date" name="onward_date" id="onward_date" class="form-control" value="{{onward_date}}" required>
+        </div>
+        <div class="col-md-2">
+          <label for="return_date">Return</label>
+          <input type="date" name="return_date" id="return_date" value="{{return_date}}" class="form-control">
+        </div>
+        <div class="col-md-2">
+          <label for="travel_class">Class</label>
+          <select name="travel_class" id="travel_class" class="form-control">
+            <option value="Economy" {{'selected' if travel_class=="Economy" else ''}}>Economy</option>
+            <option value="Business" {{'selected' if travel_class=="Business" else ''}}>Business</option>
+            <option value="FirstClass" {{'selected' if travel_class=="FirstClass" else ''}}>First Class</option>
+          </select>
+        </div>
+        <div class="col-md-2">
+          <label for="passengers">Passengers</label>
+          <input type="number" min="1" name="passengers" id="passengers" class="form-control" value="{{passengers}}" required>
+        </div>
+      </div>
+
+      <div class="form-group row">
+        <div class="col-md-3">
+          <input type="submit" class="btn btn-primary form-control" value="search">
+        </div>
+      </div>
+
+    </form>
+  </div>
+
+  <form action="">
+    <input type="" name="journey_type" value="{{journey_type}}">
+    <input type="" name="onward_date" value="{{onward_date}}">
+    <input type="" name="return_date" value="{{return_date}}">
+    <input type="" name="travel_class" value="{{travel_class}}">
+    <input type="" name="passengers" value="{{passengers}}">
+    <input type="submit" class="btn btn-primary my-1" value="Book Now">
+
+    <div class="table-responsive mt-4">
+      <div class="row">
+  
+        <div class="col-md-6">
+          <h4 class="text-center">{{onward_source['airport_code']}}, {{onward_source['airport_city']}} -> {{onward_dest['airport_code']}}, {{onward_dest['airport_city']}}</h4>
+          <table class="table" id="onward_table">
+            <thead>
+              <tr>
+                <th>select</th>
+                <th>Flight</th>
+                <th>Time</th>
+                <th>Duration</th>
+                <th>Fare</th>
+              </tr>
+            </thead>
+            <tbody>
+              {% for flight in onward_flights %}            
+              <tr>
+                <td>
+                  <div class="form-check">
+                    <input class="form-check-input" type="radio" name="onward_flight_id" value="{{flight['_id']}}" required>                  
+                  </div>
+                </td>
+                <td>{{flight["flight_no"]}}</td>
+                <td>{{flight["departure_time"].strftime("%H:%M %p")}} - {{flight["arrival_time"].strftime("%H:%M %p")}} </td>
+                <td>{{flight["duration"]}}</td>
+                <td>${{flight["fare"] * passengers}}</td>
+              </tr>   
+              
+              {% endfor %}
+            </tbody>
+          </table>
+        </div>
+  
+        <div class="col-md-6">
+          <h4 class="text-center">{{return_source['airport_code']}}, {{return_source['airport_city']}} -> {{return_dest['airport_code']}}, {{return_dest['airport_city']}}</h4>
+          <table class="table" id="return_table">
+            <thead>
+              <tr>
+                <th>Select</th>
+                <th>Flight</th>
+                <th>Time</th>
+                <th>Duration</th>
+                <th>Fare</th>
+              </tr>
+            </thead>
+            <tbody>
+              {% for flight in return_flights %}
+              
+              <tr>
+                <td>
+                  <div class="form-check">
+                    <input class="form-check-input" type="radio" name="return_flight_id" value="{{flight['_id']}}" required>                  
+                  </div>
+                </td>
+                <td>{{flight["flight_no"]}}</td>
+                <td>{{flight["departure_time"].strftime("%H:%M %p")}} - {{flight["arrival_time"].strftime("%H:%M %p")}} </td>
+                <td>{{flight["duration"]}}</td>
+                <td>${{flight["fare"] * passengers}}</td>
+              </tr>
+      
+              
+              {% endfor %}
+            </tbody>
+          </table>
+        </div>
+  
+      </div>
+      
+      
+    </div>
+
+    
+  </form>
+  
+</div>
+
+
+{% include 'shared/footer.html'%}

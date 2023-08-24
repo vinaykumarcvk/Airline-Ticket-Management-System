@@ -1,0 +1,66 @@
+{% set curPage = 'registration'%}
+{% set title = 'registration'%}
+{% include 'shared/header.html'%}
+
+<div class="container">
+  
+  {% with messages = get_flashed_messages(with_categories=true) %}
+  {% if messages %}
+  {% for category,message in messages %}
+  <div class="alert alert-{{category}} alert-dismissible fade w-50 show" role="alert">
+    {{message}}.
+    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  {% endfor %}
+  {% endif %}
+  {% endwith %}
+
+  <div class="d-flex justify-content-center">
+    <div class="card" style="width: 38rem;">
+      <div class="card-body">
+        <h5>Registration</h5>
+        <form action="{{request.url}}" method="post" id="regForm">
+
+          <div class="form-group row">
+            <div class="col-md-6">
+              <label for="first_name" class="form-label">First name</label>
+              <input type="text" id="first_name" name="first_name" class="form-control" required>
+            </div>
+            <div class="col-md-6">
+              <label for="last_name" class="form-label">Last name</label>
+              <input type="text" id="last_name" name="last_name" class="form-control" required>
+            </div>
+          </div>
+
+          <div class="form-group row">
+            <div class="col-md-6">
+              <label for="email" class="form-label">Email</label>
+              <input type="email" id="email" name="email" class="form-control" required>
+            </div>
+            <div class="col-md-6">
+              <label for="phone_number" class="form-label">Phone Number</label>
+              <input type="text" id="phone_number" name="phone_number" class="form-control" required>
+            </div>
+          </div>
+
+          <div class="form-group row">
+            <div class="col-md-6">
+              <label for="password" class="form-label">Password</label>
+              <input type="password" id="password" name="password" class="form-control" required>
+            </div>
+            <div class="col-md-6">
+              <label for="confirm_password" class="form-label">Confirm Password</label>
+              <input type="password" id="confirm_password" name="confirm_password" class="form-control" required>
+            </div>
+          </div>
+
+          <input type="submit" value="Register" class="btn btn-secondary">
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+{% include 'shared/footer.html'%}

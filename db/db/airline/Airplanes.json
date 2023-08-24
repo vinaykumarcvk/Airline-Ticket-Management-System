@@ -1,0 +1,19 @@
+[{
+  "_id": {
+    "$oid": "638613f5745e252722e37abf"
+  },
+  "airline_id": {
+    "$oid": "6385e8f29dacc3aa7de07c8a"
+  },
+  "airplane_type": "Airbus A340",
+  "airplane_capacity": 150
+},{
+  "_id": {
+    "$oid": "6386150c745e252722e37ac0"
+  },
+  "airline_id": {
+    "$oid": "6385e9e79dacc3aa7de07c90"
+  },
+  "airplane_type": "Boeing 747",
+  "airplane_capacity": 120
+}]

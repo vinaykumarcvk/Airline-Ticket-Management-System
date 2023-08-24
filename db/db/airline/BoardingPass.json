@@ -1,0 +1,91 @@
+[{
+  "_id": {
+    "$oid": "638ba225e2e4934d6237837e"
+  },
+  "reservation_id": {
+    "$oid": "638ba225e2e4934d6237837c"
+  },
+  "passenger_id": {
+    "$oid": "638ba225e2e4934d6237837d"
+  },
+  "flight_id": {
+    "$oid": "6389dedd8ea18ed3a3a0fc4c"
+  },
+  "first_name": "Sanjay",
+  "last_name": "Gupta",
+  "departure_city_code": "HYD",
+  "arrival_city_code": "MAA",
+  "departure_date": {
+    "$date": {
+      "$numberLong": "1670198400000"
+    }
+  },
+  "boarding_time": {
+    "$date": {
+      "$numberLong": "-2208929340000"
+    }
+  },
+  "terminal": 9,
+  "gate": "V16",
+  "seat": 1
+},{
+  "_id": {
+    "$oid": "638d410dba1b32a7f2b5cc1d"
+  },
+  "reservation_id": {
+    "$oid": "638d410dba1b32a7f2b5cc1b"
+  },
+  "passenger_id": {
+    "$oid": "638d410dba1b32a7f2b5cc1c"
+  },
+  "flight_id": {
+    "$oid": "6387c55aa31c2b7a3c44b554"
+  },
+  "first_name": "Test Test",
+  "last_name": "Test",
+  "departure_city_code": "HYD",
+  "arrival_city_code": "MAA",
+  "departure_date": {
+    "$date": {
+      "$numberLong": "1670371200000"
+    }
+  },
+  "boarding_time": {
+    "$date": {
+      "$numberLong": "1669936800000"
+    }
+  },
+  "terminal": 1,
+  "gate": "J6",
+  "seat": 1
+},{
+  "_id": {
+    "$oid": "638d410dba1b32a7f2b5cc1f"
+  },
+  "reservation_id": {
+    "$oid": "638d410dba1b32a7f2b5cc1b"
+  },
+  "passenger_id": {
+    "$oid": "638d410dba1b32a7f2b5cc1e"
+  },
+  "flight_id": {
+    "$oid": "6387c55aa31c2b7a3c44b554"
+  },
+  "first_name": "test2",
+  "last_name": "test",
+  "departure_city_code": "HYD",
+  "arrival_city_code": "MAA",
+  "departure_date": {
+    "$date": {
+      "$numberLong": "1670371200000"
+    }
+  },
+  "boarding_time": {
+    "$date": {
+      "$numberLong": "1669936800000"
+    }
+  },
+  "terminal": 1,
+  "gate": "J6",
+  "seat": 2
+}]

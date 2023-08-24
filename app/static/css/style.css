@@ -1,0 +1,252 @@
+@import "https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700";
+
+:root {
+    --theme1: #240166;
+    --theme2: #37029b;
+}
+
+body,
+html {
+    height: 100%;
+    margin: 0;
+}
+
+body {
+    font-family: 'Poppins', sans-serif;
+    background: #fafafa;
+}
+
+table th,
+td {
+    font-size: 0.9em;
+    vertical-align: middle;
+}
+
+p {
+    font-family: 'Poppins', sans-serif;
+    font-size: 0.9em;
+    font-weight: 300;
+    line-height: 1.7em;
+    color: #999;
+}
+
+a,
+a:hover,
+a:focus {
+    color: inherit;
+    text-decoration: none;
+    transition: all 0.3s;
+}
+
+.btn-primary{
+    background-color: var(--theme2) !important;
+    border-color:var(--theme2) !important ;
+}
+
+.bg-theme1 {
+    background-color: var(--theme1) !important;
+}
+
+.bg-theme2 {
+    background-color: var(--theme2) !important;
+}
+
+.text-theme2{
+    color: var(--theme2);
+}
+
+.btn {
+    border-radius: 0;
+}
+
+.heading {
+    height: 60px;
+    width: 100%;
+    position: relative;
+}
+
+.heading .title {
+    position: absolute;
+    border-bottom: 5px double var(--theme2);
+    color: var(--theme1);
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+.error {
+    color: red;
+    font-weight: 400;
+    display: block;
+    padding: 6px 2px;
+    font-size: 14px;
+}
+
+.form-control.error {
+    border-color: red;
+    padding: .375rem .75rem;
+}
+
+.navbar {
+    padding: 5px 5px;
+    background: #fff;
+    border: none;
+    border-radius: 0;
+    margin-bottom: 30px;
+    box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+.navbar-btn {
+    box-shadow: none;
+    outline: none !important;
+    border: none;
+}
+
+.line {
+    width: 100%;
+    height: 1px;
+    border-bottom: 1px dashed #ddd;
+    margin: 25px 0;
+}
+
+/* Login / Register */
+
+.login {
+    width: 50%;
+}
+
+.register {
+    flex-grow: 1;
+}
+
+/* auto use all remaining space */
+.login,
+.register {
+    padding: 10px;
+    margin-top: 5vh;
+}
+
+.login {
+    border-right: 3px solid #c8c8c8;
+}
+
+
+
+/* ---------------------------------------------------
+    SIDEBAR STYLE
+----------------------------------------------------- */
+
+.wrapper {
+    display: flex;
+    width: 100%;
+}
+
+#sidebar {
+    width: 250px;
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 100vh;
+    z-index: 999;
+    background: var(--theme1);
+    color: #fff;
+    transition: all 0.3s;
+}
+
+#sidebar.active {
+    margin-left: -250px;
+}
+
+#sidebar .sidebar-header {
+    padding: 10px;
+    background: var(--theme2);
+    text-align: center;
+}
+
+#sidebar ul.components {
+    padding: 10px 0;
+    border-bottom: 1px solid var(--theme2);
+}
+
+#sidebar ul p {
+    color: #fff;
+    padding: 10px;
+}
+
+#sidebar ul li a {
+    padding: 10px;
+    font-size: 1em;
+    display: block;
+}
+
+#sidebar ul li a:hover {
+    color: var(--theme1);
+    background: #fff;
+}
+
+#sidebar ul li.active>a,
+a[aria-expanded="true"] {
+    color: #fff;
+    background: var(--theme2);
+}
+
+a[data-toggle="collapse"] {
+    position: relative;
+}
+
+.dropdown-toggle::after {
+    display: block;
+    position: absolute;
+    top: 50%;
+    right: 20px;
+    transform: translateY(-50%);
+}
+
+ul ul a {
+    font-size: 0.8em !important;
+    padding-left: 30px !important;
+    background: var(--theme2);
+}
+
+/* ---------------------------------------------------
+    CONTENT STYLE
+----------------------------------------------------- */
+
+#content {
+    width: calc(100% - 250px);
+    padding: 15px;
+    min-height: 100vh;
+    transition: all 0.3s;
+    position: absolute;
+    top: 0;
+    right: 0;
+}
+
+#content.active {
+    width: 100%;
+}
+
+/* ---------------------------------------------------
+    MEDIAQUERIES
+----------------------------------------------------- */
+
+@media (max-width: 768px) {
+    #sidebar {
+        margin-left: -250px;
+    }
+
+    #sidebar.active {
+        margin-left: 0;
+    }
+
+    #content {
+        width: 100%;
+    }
+
+    #content.active {
+        width: calc(100% - 250px);
+    }
+
+    #sidebarCollapse span {
+        display: none;
+    }
+}

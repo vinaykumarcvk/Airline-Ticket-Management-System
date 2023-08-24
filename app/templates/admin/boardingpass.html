@@ -1,0 +1,72 @@
+{% set curPage = 'boardingpass'%}
+{% set title = 'View Boardingpass'%}
+{% include 'admin/shared/header.html'%}
+
+<div id="content">
+  <!-- Top Nav  -->
+  {% include 'admin/shared/topnav.html'%}
+
+  <div class="heading">
+    <h3 class="title">{{title}}</h3>
+  </div>
+
+  <a href="javascript:window.history.go(-1)" class="btn btn-sm btn-primary mb-3">Back to passengers list</a>
+  <div class="table-responsive border p-2">
+    <div class="card w-75" style="border-radius: 10px;">
+      <div class="card-header">
+        <div class="row">
+          <div class="col-sm-6">
+            <h4>{{airline['airline_name']}}</h4>
+          </div>
+        </div>
+      </div>
+      <div class="card-body">
+        <h4>{{boarding['first_name']}} {{boarding['last_name']}}</h4>
+
+        <div class="row">
+          <div class="col-sm-3">
+            <small>Flight</small><br>
+            <h5>{{flight['flight_no']}}</h5>
+          </div>
+          <div class="col-sm-3">
+            <small>From</small><br>
+            <h5>{{from_airport['airport_code']}} <small
+                style="font-size: 0.7rem;">{{flight['departure_time'].strftime("%I:%M %p")}}</small></h5>
+          </div>
+          <div class="col-sm-3">
+            <small>To</small><br>
+            <h5>{{to_airport['airport_code']}} <small
+                style="font-size: 0.7rem;">{{flight['arrival_time'].strftime("%I:%M %p")}}</small></h5>
+          </div>
+          <div class="col-sm-3">
+            <small>Date</small>
+            <h5>{{boarding["departure_date"].strftime("%m/%d/%Y")}}</h5>
+          </div>
+        </div>
+
+        <div class="row bg-info text-light">
+          <div class="col-sm-3">
+            <small>Terminal</small>
+            <h5>{{boarding["terminal"]}}</h5>
+          </div>
+          <div class="col-sm-3">
+            <small>Gate</small>
+            <h5>{{boarding["gate"]}}</h5>
+          </div>
+          <div class="col-sm-3">
+            <small>Boarding time</small>
+            <h5>{{boarding["boarding_time"].strftime("%I:%M %p")}}</h5>
+          </div>
+          <div class="col-sm-3">
+            <small>Seat</small>
+            <h5>{{boarding["seat"]}}</h5>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+  
+</div>
+
+{% include 'admin/shared/footer.html'%}
